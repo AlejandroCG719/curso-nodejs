@@ -106,8 +106,8 @@ const updateUser =  async (req, res) =>{
 };
 const getUsers = async (req, res) =>{
     try{
-        await Users.find();
-        res.send({ status: 'Ok', data: {} });
+        const users = await Users.find().select({ password: 0, __v:0, role :0 });
+        res.send({ status: 'Ok', data: users });
     }catch (e) {
         res.status(500).send({ status: 'Error', message: 'user update' });
     }
